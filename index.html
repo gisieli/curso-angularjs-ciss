@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 	<title>AngularJS - CISS</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/myApp.js"></script>
+	<script type="text/javascript" src="js/controller/formCtrl.js"></script>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body ng-controller="FormCtrl">
 	<div class="container">
 		<nav >
 			<div class="container-fluid">
@@ -23,23 +26,59 @@
 		</nav>
 	</nav>
 	<div class="jumbotron">
+	<h1 ng-bind=" 'Hello word!' "></h1>
 		<form>
 			<div>
 				<legend>Dados Pessoais</legend>
 				<div class="row">
 
-					<div class="form-group col-xs-12 col-md-6">
+					<div class="form-group col-xs-12 col-md-4">
 						<label for="name">Nome</label>
-						<input type="text" class="form-control" id="name" placeholder="Digite seu primeiro nome">
+						<input type="text" class="form-control" id="name" placeholder="Digite seu primeiro nome" ng-model="pessoa.name"></input>
 					</div>
 					<div class="form-group col-xs-12 col-md-6">
 						<label for="lastname">Sobrenome</label>
-						<input type="text" class="form-control" id="lastname" placeholder="Digite seu sobrenome">
+						<input type="text" class="form-control" id="lastname" placeholder="Digite seu sobrenome" ng-model="pessoa.lastname"></input>
 					</div>
+					<div class="form-group col-xs-12 col-md-2">
+						<label for="age">E-mail</label>
+						<input type="number" class="form-control" id="age" placeholder="Idade" ng-model="pessoa.age"></inputs>
+					</div>	
+				</div>
+			</div>
+
+			<div>
+				<legend>Contato</legend>
+				<div class = "row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="phonenumber">Telefone</label>
+						<input type="number" class="form-control" id="phonenumber" placeholder="Digite seu telefone" ng-model="pessoa.phonenumber">
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<label for="email">E-mail</label>
+						<input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" ng-model="pessoa.email">
+					</div>			
 				</div>
 			</div>
 		</form>
+		<h2 ng-if="pessoa.name"> Dados cadastrados </h2> </br>
+		<p ng-if="pessoa.name">Nome: <strong ng-bind="pessoa.name"></strong></p>
+		<p ng-if="pessoa.lastname">Sobrenome: <strong ng-bind="pessoa.lastname"></strong></p>
+		<p ng-if="pessoa.age">Idade: <strong ng-bind="pessoa.age"></strong></p>
+		<p ng-if="pessoa.phonenumber">Telefone: <strong ng-bind="pessoa.phonenumber"></strong></p>
+		<p ng-if="pessoa.email">E-mail: <strong ng-bind="pessoa.email"></strong></p>
+
 	</div>
 </div>
 </body>
+
+<!--	 Colocar valor padrão na variável caso ela não tenha valor
+<h2> Dados cadastrados </h2> </br>
+		<p>Nome: <strong ng-bind="pessoa.name || 'Nome não cadastrado'"></strong>  </p>
+		<p>Sobrenome: <strong ng-bind="pessoa.lastname || 'Sobrenome não cadastrado'"></strong>  </p>
+		<p>Idade: <strong ng-bind="pessoa.age || 'Idade não cadastrada'"></strong></p>
+		<p>Telefone: <strong ng-bind="pessoa.phonenumber || 'Telefone não cadastrado'"></strong></p>
+		<p>E-mail: <strong ng-bind="pessoa.email || 'E-mail não cadastrado'"></strong></p>		-->
 </html>
+
+	
