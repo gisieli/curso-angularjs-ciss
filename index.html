@@ -26,59 +26,66 @@
 		</nav>
 	</nav>
 	<div class="jumbotron">
-	<h1 ng-bind=" 'Hello word!' "></h1>
+		<h1 ng-bind=" 'Cadastro de tarefas' "></h1>
 		<form>
 			<div>
 				<legend>Dados Pessoais</legend>
 				<div class="row">
 
-					<div class="form-group col-xs-12 col-md-4">
-						<label for="name">Nome</label>
-						<input type="text" class="form-control" id="name" placeholder="Digite seu primeiro nome" ng-model="pessoa.name"></input>
+					<div class="form-group col-xs-12">
+						<label for="task">Tarefa</label>
+						<input type="text" class="form-control" id="task" placeholder="Digite a tarefa" ng-model="tarefa"></input>
+					</br>
+					<div>
+						<button type="submit" class="btn btn-primary pull-right" ng-click="cadastraTarefa(tarefa)">Cadastrar</button>	
 					</div>
-					<div class="form-group col-xs-12 col-md-6">
-						<label for="lastname">Sobrenome</label>
-						<input type="text" class="form-control" id="lastname" placeholder="Digite seu sobrenome" ng-model="pessoa.lastname"></input>
-					</div>
-					<div class="form-group col-xs-12 col-md-2">
-						<label for="age">E-mail</label>
-						<input type="number" class="form-control" id="age" placeholder="Idade" ng-model="pessoa.age"></inputs>
-					</div>	
+				</div>
+			</div>
+		</div>
+	</form>
+	<hr>
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<label for="search">Buscar:</label>
+			<input class="form-control" type="text" id="search" ng-model="search"></input>
+			<!-- <p>{{ search }}</p> -->
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Check</th>	
+					<th>Tarefa</th>
+					<th>Data</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in list | filter:search">
+					<td><input type="checkbox"</input></td>
+					<td ng-bind="item.nomeTarefa"></td>
+					<td ng-bind="item.dataTarefa | date:'dd/MM/yyyy'"></td>
+					<td>
+						<button class="btn btn-success" ng-click="editaTarefa($index)">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row" ng-show= 'clicouEditar'>
+
+			<div class="form-group col-xs-8">
+				<input type="text" class="form-control" ng-model="renomear"></input>
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-primary pull-right" ng-click="renomearTarefa(renomear)">Renomear</button>	
 				</div>
 			</div>
 
-			<div>
-				<legend>Contato</legend>
-				<div class = "row">
-					<div class="form-group col-xs-12 col-md-4">
-						<label for="phonenumber">Telefone</label>
-						<input type="number" class="form-control" id="phonenumber" placeholder="Digite seu telefone" ng-model="pessoa.phonenumber">
-					</div>
-					<div class="form-group col-xs-12 col-md-8">
-						<label for="email">E-mail</label>
-						<input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" ng-model="pessoa.email">
-					</div>			
-				</div>
-			</div>
-		</form>
-		<h2 ng-if="pessoa.name"> Dados cadastrados </h2> </br>
-		<p ng-if="pessoa.name">Nome: <strong ng-bind="pessoa.name"></strong></p>
-		<p ng-if="pessoa.lastname">Sobrenome: <strong ng-bind="pessoa.lastname"></strong></p>
-		<p ng-if="pessoa.age">Idade: <strong ng-bind="pessoa.age"></strong></p>
-		<p ng-if="pessoa.phonenumber">Telefone: <strong ng-bind="pessoa.phonenumber"></strong></p>
-		<p ng-if="pessoa.email">E-mail: <strong ng-bind="pessoa.email"></strong></p>
-
+			<!--<p>{{ list }}</p> -->
+		</div>
 	</div>
 </div>
 </body>
-
-<!--	 Colocar valor padrão na variável caso ela não tenha valor
-<h2> Dados cadastrados </h2> </br>
-		<p>Nome: <strong ng-bind="pessoa.name || 'Nome não cadastrado'"></strong>  </p>
-		<p>Sobrenome: <strong ng-bind="pessoa.lastname || 'Sobrenome não cadastrado'"></strong>  </p>
-		<p>Idade: <strong ng-bind="pessoa.age || 'Idade não cadastrada'"></strong></p>
-		<p>Telefone: <strong ng-bind="pessoa.phonenumber || 'Telefone não cadastrado'"></strong></p>
-		<p>E-mail: <strong ng-bind="pessoa.email || 'E-mail não cadastrado'"></strong></p>		-->
 </html>
 
-	
