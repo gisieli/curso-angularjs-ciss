@@ -27,9 +27,10 @@
 	</nav>
 	<div class="jumbotron">
 		<h1 ng-bind=" 'Cadastro de tarefas' "></h1>
-		<form>
+		<form ng-hide='clicouEditar'>
+			<legend>Dados Pessoais</legend>
 			<div>
-				<legend>Dados Pessoais</legend>
+				
 				<div class="row">
 
 					<div class="form-group col-xs-12">
@@ -43,8 +44,21 @@
 			</div>
 		</div>
 	</form>
+	<div class="row" ng-show='clicouEditar'>
+		<legend>Editar</legend>
+		<div class="form-group col-xs-8">
+			<input type="text" class="form-control" ng-model="renomear"></input>
+		</div>
+		<div class="col-xs-3">
+			<button class="btn btn-primary pull-right" ng-click="renomearTarefa(renomear)">Renomear</button>	
+		</div>
+		<div class "col-xs-3">
+			<button class="btn btn-primary pull rigth" ng-click="cancelarEdicao(cancelar)">Cancelar</button>
+		</div>
+	</div>
+
 	<hr>
-	<div class="row">
+	<div class="row" ng-show= 'list.length > 0'>
 		<div class="form-group col-xs-12">
 			<label for="search">Buscar:</label>
 			<input class="form-control" type="text" id="search" ng-model="search"></input>
@@ -61,30 +75,29 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="item in list | filter:search">
-					<td><input type="checkbox"</input></td>
+					<td><input type="checkbox" ng-click="removeTarefa($index)"></input></td>
 					<td ng-bind="item.nomeTarefa"></td>
 					<td ng-bind="item.dataTarefa | date:'dd/MM/yyyy'"></td>
 					<td>
 						<button class="btn btn-success" ng-click="editaTarefa($index)">
 							<i class="glyphicon glyphicon-pencil"></i>
 						</button>
+
+						<button class="btn btn-danger" ng-click="removeTarefa($index)">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="row" ng-show= 'clicouEditar'>
-
-			<div class="form-group col-xs-8">
-				<input type="text" class="form-control" ng-model="renomear"></input>
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-primary pull-right" ng-click="renomearTarefa(renomear)">Renomear</button>	
-				</div>
-			</div>
-
-			<!--<p>{{ list }}</p> -->
-		</div>
+		
+		<!--<p>{{ list }}</p> -->
 	</div>
+	<div class="row" ng-hide= 'list.length > 0'>
+		<h3 class="text-center">Não há tarefas!</h3>
+	</div>
+</div>
+
 </div>
 </body>
 </html>
