@@ -46,13 +46,13 @@ myApp.controller('FormCtrl', function($scope){
 		}
 	};
 
-	$scope.editaTarefa = function( dataIndex ){
+	$scope.editaTarefa = function ( dataIndex ){
 		$scope.clicouEditar = true;
 		$scope.indexTarefa = dataIndex;
 		$scope.renomear = $scope.list[dataIndex].nomeTarefa;
 	};
 
-	$scope.renomearTarefa = function (novoNome){
+	$scope.renomearTarefa = function ( novoNome ){
 		var editObj= {};
 		editObj = {
 			'nomeTarefa' : novoNome,
@@ -64,6 +64,15 @@ myApp.controller('FormCtrl', function($scope){
 		$scope.list[$scope.indexTarefa] = editObj;
 		//$scope.indexTarefa = undefined;
 		//$scope.renomear =  undefined;
+		$scope.clicouEditar = false;
+	}
+
+	$scope.removeTarefa = function ( remove ){
+		 $scope.list.splice(remove, 1);
+
+	}
+
+	$scope.cancelarEdicao = function ( cancelar ){
 		$scope.clicouEditar = false;
 	}
 });
